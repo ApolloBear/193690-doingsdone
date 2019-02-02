@@ -1,7 +1,6 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
-$checked = 'checked';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
