@@ -1,47 +1,54 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
-$projects = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];
-
-
+$projects = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];
 $tasks = [
     [
         'task' => 'Собеседование в IT компании',
         'date' => '01.12.2019',
-        'category' => 'Работа',
-        'compleate' => 'Нет'
+        'project' => 'Работа',
+        'complete' => 'Нет'
     ],
     [
-            'task' => 'Выполнить тестовое задание',
-            'date' => '25.12.2019',
-            'category' => 'Работа',
-            'compleate' => 'Нет'
+        'task' => 'Выполнить тестовое задание',
+        'date' => '25.12.2019',
+        'project' => 'Работа',
+        'complete' => 'Нет'
     ],
     [
-            'task' => 'Сделать задание первого раздела',
-            'date' => '21.12.2019',
-            'category' => 'Учеба',
-            'compleate' => 'Да'
+        'task' => 'Сделать задание первого раздела',
+        'date' => '21.12.2019',
+        'project' => 'Учеба',
+        'complete' => 'Да'
     ],
     [
-            'task' => 'Встреча с другом',
-            'date' => '22.12.2019',
-            'category' => 'Входящие',
-            'compleate' => 'Нет'
+        'task' => 'Встреча с другом',
+        'date' => '22.12.2019',
+        'project' => 'Входящие',
+        'complete' => 'Нет'
     ],
     [
-            'task' => 'Купить корм для кота',
-            'date' => 'Нет',
-            'category' => 'Домашние дела',
-            'compleate' => 'Нет'
+        'task' => 'Купить корм для кота',
+        'date' => 'Нет',
+        'project' => 'Домашние дела',
+        'complete' => 'Нет'
     ],
     [
-            'task' => 'Заказать пиццу',
-            'date' => 'Нет',
-            'category' => 'Домашние дела',
-            'compleate' => 'Нет'
+        'task' => 'Заказать пиццу',
+        'date' => 'Нет',
+        'project' => 'Домашние дела',
+        'complete' => 'Нет'
     ]
 ];
+function projectCalculate($project, $tasks) {
+    $countProject = 0;
+    foreach ($tasks as $task) {
+        if ($task['project'] === $project) {
+            $countProject++;
+        }
+    }
+    return $countProject;
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -90,7 +97,7 @@ $tasks = [
                         <?php foreach ($projects as $project): ?>
                             <li class="main-navigation__list-item">
                                 <a class="main-navigation__list-item-link" href="#"><?=$project; ?></a>
-                                <span class="main-navigation__list-item-count">0</span>
+                                <span class="main-navigation__list-item-count"><?= projectCalculate($project, $tasks) ?></span>
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -125,7 +132,7 @@ $tasks = [
 
                 <table class="tasks">
                     <?php foreach ($tasks as $task): ?>
-                        <?php if ($task['compleate'] === 'Нет'): ?>
+                        <?php if ($task['complete'] === 'Нет'): ?>
                             <tr class="tasks__item task">
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
